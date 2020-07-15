@@ -1,15 +1,17 @@
 import React from 'react';
-import { Todo } from '../Interfaces/Interfaces';
+import { PreparedTodo } from '../Interfaces/Interfaces';
+
+import './TodoItem.css';
 
 interface Props {
-  todo: Todo;
+  todo: PreparedTodo;
 }
 
 export const TodoItem: React.FC<Props> = ({ todo }) => {
   return (
     <div className="todo__item-wrapper" style={{ backgroundColor: `${todo.completed ? 'green' : 'red'}` }}>
-      <span>{todo.user?.name}</span>
-      <p>{todo.title}</p>
+      <span className="todo__item-name">{todo.user?.name}</span>
+      <p className="todo__item-title">{todo.title}</p>
     </div>
   );
 };

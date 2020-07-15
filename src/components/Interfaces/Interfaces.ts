@@ -5,7 +5,6 @@ export interface Todo {
   title: string;
   updatedAt: string;
   userId: number;
-  user?: User;
 }
 
 export interface User {
@@ -32,3 +31,13 @@ type Geo = {
   lat: string;
   lng: string;
 };
+
+export interface PreparedTodo {
+  completed: boolean;
+  createdAt: string;
+  id: number;
+  title: string;
+  updatedAt: string;
+  userId: number;
+  user: User;
+}
