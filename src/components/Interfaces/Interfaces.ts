@@ -39,5 +39,5 @@ export interface PreparedTodo {
   title: string;
   updatedAt: string;
   userId: number;
-  user: User;
+  user: User | undefined;
 }

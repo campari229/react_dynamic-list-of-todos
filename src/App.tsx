@@ -22,12 +22,12 @@ class App extends React.Component<{}, State> {
       isLoading: true,
     });
 
-    const todos = (await getTodos<[]>()).data;
-    const users = (await getUsers<[]>()).data;
-    const preparedTodos: PreparedTodo[] = todos.map((todo: Todo) => (
+    const todos: Todo[] = await getTodos();
+    const users: User[] = await getUsers();
+    const preparedTodos = todos.map((todo) => (
       {
         ...todo,
-        user: users.find((user: User) => user.id === todo.userId) as unknown as User,
+        user: users.find((user) => user.id === todo.userId),
       }
     ));
 
@@ -45,7 +45,13 @@ class App extends React.Component<{}, State> {
 
   sortByName = () => {
     this.setState(prevState => ({
-      todos: prevState.todos.sort((a, b) => a.user?.name.localeCompare(b.user?.name)),
+      todos: prevState.todos.sort((a, b) => {
+        if (a.user && b.user) {
+          return a.user.name.localeCompare(b.user.name);
+        }
+
+        return 0;
+      }),
     }));
   };
 
