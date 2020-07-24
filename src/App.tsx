@@ -3,7 +3,7 @@ import './App.css';
 
 import { Todo, User, PreparedTodo } from './components/Interfaces/Interfaces';
 import { TodoList } from './components/TodoList/TodoList';
-import { getUsers, getTodos } from './api';
+import { getData, usersURL, todosURL } from './api';
 import { Buttons } from './components/Buttonns/Buttons';
 
 interface State {
@@ -22,8 +22,8 @@ class App extends React.Component<{}, State> {
       isLoading: true,
     });
 
-    const todos: Todo[] = await getTodos();
-    const users: User[] = await getUsers();
+    const todos = await getData<Todo[]>(todosURL);
+    const users = await getData<User[]>(usersURL);
     const preparedTodos = todos.map((todo) => (
       {
         ...todo,
